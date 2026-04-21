@@ -9,6 +9,24 @@
 
 RefactorAI is a comprehensive, AI-powered technical debt analyzer that helps development teams identify, quantify, and prioritize technical debt in their codebases. It combines static analysis, complexity metrics, and intelligent suggestions to provide actionable insights for improving code quality.
 
+## 🎬 Demo
+![RefactorAI Demo](demo.gif)
+
+*Technical debt analysis with AI suggestions*
+
+## Screenshots
+| Component | Preview |
+|-----------|---------|
+| Debt Dashboard | ![dashboard](screenshots/debt-dashboard.png) |
+| Code Smells | ![smells](screenshots/code-smells.png) |
+| Refactor Preview | ![preview](screenshots/refactor-preview.png) |
+
+## Visual Description
+Debt dashboard shows technical debt metrics by component. Code smells display issues with severity and location. Refactor preview shows suggested improvements with impact estimates.
+
+---
+
+
 ## Table of Contents
 
 - [Features](#features)
