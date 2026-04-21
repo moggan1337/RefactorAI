@@ -1,0 +1,105 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "refactorai"
+version = "1.0.0"
+description = "AI-Powered Technical Debt Analyzer and Refactoring Assistant"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "RefactorAI Team", email = "team@refactorai.dev"}
+]
+keywords = ["technical-debt", "code-quality", "refactoring", "static-analysis", "technical-debt-quantification"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "astor>=0.8.1",
+    "radon>=6.0.1",
+    "mccabe>=0.7.0",
+    " lizard>=1.17.10",
+    "pylint>=3.0.0",
+    "jedi>=0.19.0",
+    "graphviz>=0.20.1",
+    "tree-sitter>=0.20.0",
+    "tree-sitter-python>=0.20.0",
+    "click>=8.1.0",
+    "rich>=13.7.0",
+    "typer>=0.9.0",
+    "tqdm>=4.66.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "networkx>=3.0",
+    "pyyaml>=6.0.0",
+    "requests>=2.31.0",
+    "openai>=1.0.0",
+    "anthropic>=0.18.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.7.0",
+    "ruff>=0.1.0",
+]
+api = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.5.0",
+]
+all = [
+    "refactorai[dev,api]",
+]
+
+[project.scripts]
+refactorai = "refactorai.cli.main:main"
+refactorai-server = "refactorai.api.server:main"
+
+[project.urls]
+Homepage = "https://github.com/moggan1337/RefactorAI"
+Documentation = "https://refactorai.readthedocs.io"
+Repository = "https://github.com/moggan1337/RefactorAI"
+Issues = "https://github.com/moggan1337/RefactorAI/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=refactorai --cov-report=term-missing"
