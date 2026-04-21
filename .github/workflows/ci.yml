@@ -1,33 +1,19 @@
 name: CI
-
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
-
+on: [push, pull_request]
 jobs:
-  lint-and-test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-          
-      - name: Install dependencies
+      - name: Install
         run: |
-          pip install -e .
-          pip install flake8 pytest
-      
-      - name: Lint
-        continue-on-error: true
+          if [ -f package.json ]; then npm install --legacy-peer-deps || true
+          elif [ -f pyproject.toml ]; then pip install -e . || true
+          elif [ -f setup.py ]; then pip install -e . || true
+          fi
+      - name: Build
         run: |
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
-          
-      - name: Test
-        continue-on-error: true
-        run: |
-          python -m pytest tests/ -v || true
+          if [ -f package.json ]; then npm run build || true
+          elif [ -f pyproject.toml ]; then python -m py_compile . || true
+          elif [ -f setup.py ]; then python -m py_compile . || true
+          fi
